@@ -1,0 +1,45 @@
+<!-- <script>
+    $('i').click(function() {
+        const classes = $(this).attr('class').split(' ');
+        var whichStar = classes[0];
+        var howMany = whichStar % 5;
+        for (var i = whichStar; i >= whichStar - howMany; i--) {
+            var className = "." + i;
+            $(className).html('<i class="fas fa-star me-1"></i>');
+        }
+    });
+</script>
+---> 
+<script> 
+const starContainers = document.querySelectorAll('.star-rating');
+
+starContainers.forEach(starContainer => {
+    const stars = starContainer.querySelectorAll('input[type="radio"]');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const rating = parseInt(star.value);
+
+            const currentStarIndex = Array.from(stars).indexOf(star);
+
+            const previousStars = Array.from(stars).slice(0, currentStarIndex + 1);
+
+            previousStars.forEach(previousStar => {
+                const label = previousStar.nextElementSibling;
+                label.classList.add('active');
+            });
+
+            const remainingStars = Array.from(stars).slice(currentStarIndex + 1);
+
+            remainingStars.forEach(remainingStar => {
+                const label = remainingStar.nextElementSibling;
+                label.classList.remove('active');
+            });
+
+            console.log('Selected rating:', rating);
+        });
+    });
+});
+
+
+</script>
